@@ -2,10 +2,10 @@ package server
 
 import (
 	"context"
-	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"go.uber.org/fx"
 )
 
@@ -18,7 +18,7 @@ func New() *gin.Engine {
 	return gin.New()
 }
 
-func InitServer(lc fx.Lifecycle, s *gin.Engine, l *log.Logger) {
+func InitServer(lc fx.Lifecycle, s *gin.Engine, l *logrus.Logger) {
 	lc.Append(fx.Hook{
 		OnStart: func(c context.Context) error {
 			port := os.Getenv("TODO_PORT")
@@ -31,7 +31,7 @@ func InitServer(lc fx.Lifecycle, s *gin.Engine, l *log.Logger) {
 	})
 }
 
-func RegisterHanders(s *gin.Engine, hss []*handlerSignature) {
+func RegisterHanders(s *gin.Engine, hss []*handlerSignature, log *logrus.Logger) {
 	for _, hs := range hss {
 		switch hs.method {
 		case "GET":

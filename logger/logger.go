@@ -1,11 +1,9 @@
 package logger
 
 import (
-	"log"
-	"os"
+	"github.com/sirupsen/logrus"
 )
 
-func New() *log.Logger {
-	log.Println("Initialized a custom logger")
-	return log.New(os.Stdout, "[Custom logger]: ", 0)
+func New() *logrus.Logger {
+	return logrus.New()
 }

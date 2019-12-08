@@ -1,6 +1,7 @@
 package main
 
 import (
+	"todo-graph/graphql"
 	log "todo-graph/logger"
 	"todo-graph/server"
 
@@ -14,6 +15,7 @@ func main() {
 			log.New,
 			server.GetAllHandlers,
 		),
+		graphql.Module,
 		fx.Invoke(server.RegisterHanders, server.InitServer),
 	)
 	app.Run()
